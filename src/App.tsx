@@ -1,17 +1,28 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Add from './pages/Add';
+import Book from './pages/Book';
+import Edit from './pages/Edit';
 import Home from './pages/Home';
-
+import NotFound from './pages/NotFound';
+import Signin from './pages/Signin';
+import { ErrorBoundary } from 'react-error-boundary'
+import Error from './pages/Error';
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/book/:id' element={<Home />} />
-        <Route path='/add' element={<Home />} />
-        <Route path='/signin' element={<Home />} />
-        <Route path='/' element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary FallbackComponent={Error}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/edit/:id' element={<Edit />} />
+          <Route path='/book/:id' element={<Book />} />
+          <Route path='/add' element={<Add />} />
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/' element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
